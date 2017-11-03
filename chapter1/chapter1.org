@@ -1,0 +1,39 @@
+#+TITLE: Chapter1
+#+OPTIONS: ^:{}
+* AWSの基本
+** AWSとは
+*** クラウドとは
+
+*** 物理サーバ（オンプレミス）とAWSの違い
+*** レンタルサーバ（共有サーバ）とAWSの違い
+*** プライベートクラウドとAWS
+*** AWSのサービスの全体像
+
+** AWSのネットワークサービス
+*** リージョンとアベイラビリティゾーン
+*** Amazon Virtual Private Cloud
+*** Amazon Route 53
+*** AWSネットワークとVPCネットワーク
+
+** ハードウェアリソースとしてのAWS
+*** Amazon Elastic Compute Cloud
+*** Amazon Elastic Block Store
+*** EC2におけるバックアップ
+*** Amazon Simple Storage Service
+*** Amazon Glacier
+
+** アプリケーション基盤としてのAWS
+*** Amazon Relation Database Service
+*** AWS Elastic Beantalk
+*** Amazon ElasticCache
+
+** サービスとしてのAWS
+*** AWSのアプリケーションサービスの概念
+*** SESとSQS
+*** SNSとCloudWatch
+
+** AWSの利用コスト
+*** AWSの料金体系
+*** AWSの料金計算の仕方
+
+
