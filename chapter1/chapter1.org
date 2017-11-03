@@ -108,14 +108,64 @@ AWSのVPCに接続する専用線接続サービス。
 ユーザーから一番近いエッジロケーションから配信する。
 
 **** Amazon Route 53
+ドメインネームシステム(DNS)サービス。
+脆弱性、DDoS攻撃への対応、DNSの運用をほぼマネジメントレスで利用できるサービス。
+
+**** Amazon Simple Queue Service(SQS)
+メッセージキューサービス。
+
+**** Amazon Simple Notification Service(SNS)
+プッシュ型のメッセージングサービス。
+
+**** Amazon Simple Email Service(SES)
+メール配信サービス。
+
+**** AWS Identity and Access Management(IAM)
+AWSのアカウント管理サービス
+
+**** AWS CloudTrail
+AWS APIの呼び出しを記録してロギングするサービス。
 
 
+
+
+**** Amazon CloudWatch
+AWS上のリソースやアプリケーションのモニタリングサービス。
+
+**** AWS Elastic Beantalk
+WebアプリケーションサーバのPaaS。
+Auto Scalingの設定をしておくことで、アプリケーションの縮退を自動的に行う。
+
+**** AWS CloudFormation
+AWSの環境構築を自動化するツール。
+AWS上でのインフラ構築を劇的に効率化できる可能性を秘めている。
+
+**** AWSサポート
+電話やメール・チャットでの技術面の支援を行う。
+
+**** AWS Trusted Advisor
+AWSの適切な利用をサジェストするツール。
+[[http://aws.typepad.com/aws_japan/][Amazon Web Servicesブログ]]
 
 
 ** AWSのネットワークサービス
 *** リージョンとアベイラビリティゾーン
+**** リージョン
+AWSがサービスを提供している拠点。
+操作するための手段
+- ブラウザ(AWSマネジメントコンソール)
+- 各種プログラミング言語(SDK)
+- 各種OSコマンドラインツール(CLI)
+
+**** アベイラビリティゾーン
+データセンターとほぼ同義。
+可用性や耐障害性の面からマルチアベイラビリティゾーン構成を基本にシステムを構築することが推奨されている。
+
 *** Amazon Virtual Private Cloud
+特になし
+
 *** Amazon Route 53
+
 *** AWSネットワークとVPCネットワーク
 
 ** ハードウェアリソースとしてのAWS
