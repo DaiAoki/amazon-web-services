@@ -165,11 +165,15 @@ AWSがサービスを提供している拠点。
 特になし
 
 *** Amazon Route 53
+DNSサービス。
 
 *** AWSネットワークとVPCネットワーク
+特になし
 
 ** ハードウェアリソースとしてのAWS
 *** Amazon Elastic Compute Cloud
+
+
 *** Amazon Elastic Block Store
 *** EC2におけるバックアップ
 *** Amazon Simple Storage Service
