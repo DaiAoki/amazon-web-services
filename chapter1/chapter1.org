@@ -147,7 +147,6 @@ AWS上でのインフラ構築を劇的に効率化できる可能性を秘め�
 AWSの適切な利用をサジェストするツール。
 [[http://aws.typepad.com/aws_japan/][Amazon Web Servicesブログ]]
 
-
 ** AWSのネットワークサービス
 *** リージョンとアベイラビリティゾーン
 **** リージョン
@@ -170,27 +169,126 @@ DNSサービス。
 *** AWSネットワークとVPCネットワーク
 特になし
 
-** ハードウェアリソースとしてのAWS
-*** Amazon Elastic Compute Cloud
-# TODO: ここから再開!!!
+** ハードウェアリソースとしてのAWS(IaaS)
+*** Amazon Elastic Compute Cloud(EC2)
+- 仮想サーバインスタンス
+- バックアップイメージ
+- ディスク
+- ファイアウォール
+- 固定グローバルIP
+
+基本的な利用方法は、あらかじめAWSに用意されているAMI(Amazon Machine Image)からディスク容量や、
+通信要件を設定したうえで、インスタンスを作成する。
+
+**** インスタンス
+従来のオンプレミス環境上のサーバに相当する。
+インスタンスが持つ情報
+- OS
+- CPU
+- メモリ
+
+インスタンスタイプはユースケースに応じて、系統が分かれている。
+T2インスタンス：汎用的な使用
+M3インスタンス：汎用的な使用
+C3インスタンス：CPU性能を高くした
+C4インスタンス：CPU性能を高くした
+R3インスタンス：メモリ容量を大きくした
+=> さらに、small/medium/large/xlargeのように性能の選択肢がある
+
+**** EBS
+EBS-Backedインスタンス
+OSを含むルートデバイスの情報をEBSに格納したインスタンス。
 
 *** Amazon Elastic Block Store
-*** EC2におけるバックアップ
-*** Amazon Simple Storage Service
-*** Amazon Glacier
+外付けディスクに相当。
 
-** アプリケーション基盤としてのAWS
+*** EC2におけるバックアップ
+- AMI(Amazon Machine Image)
+- EBSスナップショット
+
+*** Amazon Simple Storage Service(S3)
+ストレージサービス。
+- FTPサーバのような感覚で単純なファイルの保存領域
+- AWSサービスの利用ログの保存
+- 静的WebサイトとしてのWebホスティング機能
+
+**** S3のバケットとオブジェクトの概念
+バケットというコンテナをリージョンを選択した上で作成し、
+そこへオブジェクトとして、データを保存していく。
+また、オブジェクトをグルーピングするディレクトリを作成して、
+ファイルサーバのようにディレクトリを階層化することも可能。
+
+静的なコンテンツをホスティングすることができる。
+動的なコンテンツに関しては、Elastic Beanstalkを利用する、あるいは、EC2で独自にWebサーバを作成する
+
+*** Amazon Glacier
+アーカイブストレージサービス。
+長期間保存し、アクセス頻度が低く、取り出しに時間がかかっても問題ないデータを保存する
+
+** アプリケーション基盤としてのAWS(PaaS)
 *** Amazon Relation Database Service
+AWS上でRDBMSを利用する二つの方法
+- EC2インスタンスにRDBMSをインストールする方法
+- RDS
+=>基本的にはRDSを利用するのが良い
+
+**** RDSのインスタンスタイプ
+m3インスタンス：標準的
+r3インスタンス：メモリ最適化された
+マイクロインスタンス：低価格
+=> さらにsmall/medium/largeといったスペックがある
+
+一度起動したら常時起動されているため、課金されないようにするにはインスタンスを削除するしかない。
+
+**** マルチAZ
+マルチAZ機能はRDSの可用性を高める機能。
+有効にすることで、作成したRDSインスタンスに対するスタンバイレプリカが別のAZ(アベイラビリティーゾーン)に作成される。
+本番では必ず有効に、開発環境では費用がかさむため、無効に。
+
 *** AWS Elastic Beantalk
+アプリケーションをデプロイするだけでサービスを開始できるサービス。
+User              ←SNS ←CloudWatch → Auto Scaling
+↓(デプロイ)               ↓          ⇅
+Elastic Beanstalk →ELB → EC2 Instances ⇄ RDS
+                 (構築)
+
+**** ebコマンド
+AWS Command Line Interface(CLI)をインストールすることで、ebコマンドが利用可能になる。
+ebコマンドを利用すると、Elastic Beantalkにeb deployでアプリケーションをデプロイすることができるようになる。
+実行にはPython2.7以上が必要。
+
 *** Amazon ElasticCache
+Webシステムの高速化・信頼性の向上のため、データベースへのクエリ結果をキャッシュしたり、
+セッション情報をWebサーバ以外に格納したりする。
+Elastic Cacheは一つ以上のノードをクラスタ化して提供する。
 
 ** サービスとしてのAWS
 *** AWSのアプリケーションサービスの概念
+複数ユーザーが使用することを前提にサービスを提供しているため、
+一時的な負荷の増大も全体でみた時には軽微な負担にしかならない。
+
 *** SESとSQS
+メール配信サービスとキューサービス。
+
 *** SNSとCloudWatch
+AWSの通知サービス(SNS)、監視サービス(Cloud Watch)
+
+**** Amazon Simple Notification Service(SNS)
+プッシュ型の通知サービス。
+SQSやCloudWatch等と組み合わせて、システム間の連携や外部への通知等に利用する。
+
+**** Amazon CloudWatch
+AWSの各種リソースをモニタリングするサービス。
+- 定義した監視条件(メトリクス)に達した時にアラートを通知する機能
+- CloudWatch Logsと呼ばれるインスタンスログを格納する機能
 
 ** AWSの利用コスト
 *** AWSの料金体系
+Amazon EC2 料金表
+http://aws.amazon.com/jp/ec2/pricing/
+クラウドサービス無料利用枠
+http://aws.amazon.com/jp/free/
+
 *** AWSの料金計算の仕方
 
 
