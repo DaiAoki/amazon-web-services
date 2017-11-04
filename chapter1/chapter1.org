@@ -172,7 +172,7 @@ DNSサービス。
 
 ** ハードウェアリソースとしてのAWS
 *** Amazon Elastic Compute Cloud
-
+# TODO: ここから再開!!!
 
 *** Amazon Elastic Block Store
 *** EC2におけるバックアップ
